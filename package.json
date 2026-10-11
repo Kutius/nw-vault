@@ -14,6 +14,7 @@
     "dev:kv": "wrangler dev -c wrangler.kv.toml",
     "dev:demo": "vite --config webapp/vite.config.ts --mode demo --host 127.0.0.1 --port 5174",
     "build": "vite build --config webapp/vite.config.ts",
+    "build:cf": "node -e \"require('node:fs').mkdirSync('dist',{recursive:true})\" && wrangler build --experimental-new-config --experimental-cf-build-output",
     "build:demo": "vite build --config webapp/vite.config.ts --mode demo && node scripts/pages-spa-redirects.cjs",
     "domains:sync": "node scripts/sync-global-domains.mjs",
     "i18n": "node scripts/i18n-validate.cjs",
@@ -27,6 +28,7 @@
     "test:webauthn-connectors": "node --test scripts/webauthn-mobile-connector.test.mjs scripts/webauthn-connector.test.mjs && tsx --test scripts/webauthn-connector-headers.test.ts",
     "deploy": "wrangler deploy",
     "deploy:kv": "node scripts/ensure-kv.cjs && wrangler deploy -c wrangler.kv.toml",
+    "deploy:cf": "npm run build:cf && cf deploy --prebuilt",
     "deploy:demo": "npm run build:demo && wrangler pages deploy dist --project-name nw-demo"
   },
   "keywords": [
@@ -67,6 +69,7 @@
     "@preact/preset-vite": "^2.10.6",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.6.4",
+    "cf": "^1.0.0-beta.14",
     "opencc-js": "^1.4.2",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",

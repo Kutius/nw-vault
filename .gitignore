@@ -9,6 +9,9 @@ RELEASE_NOTES.md
 tests/selfcheck.ts
 problem.md
 
+# cf
+.cloudflare/
+
 # Build output
 dist/
 build/
